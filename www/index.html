@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/install-button.css">
+    <link rel="stylesheet" href="css/layouts.css">
+    <style>
+        x-view > header, xview > footer{
+            background-color:#e5e5e5;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Use this installation button to install locally without going
+         through the marketpace (see app.js) -->
+    <!-- <button id="install-btn">Install</button>     -->
+
+    <div class="loading">Loading...</div>
+
+    <x-view id="app">
+      <x-view class="home">
+        <x-view class="homesub">
+          <header>
+            <h1>Live View</h1>
+          </header>
+          <iframe src="http://google.com" height="300px" id="iframee" mozbrowser></iframe>
+	<div id="iframe-content"></div>
+    	<footer>    
+	  <input type="text" id="link" placeholder="Type here"/>
+          <button id="share" >Share page</button>
+            
+            <button style="float:right;" data-view=".list">Discuss</button>
+          </footer>
+        </x-view>
+
+        <x-listview class="list">
+          <header>
+            <h1>Discuss</h1>
+          </header>
+            <p></p>
+            <div id="chatstream"></div>
+        <footer>    
+            <input type="text" id="message" placeholder="Type here"/>
+            <button id="send">Send</button>
+        </footer>
+        </x-listview>
+
+    </x-view>
+
+    <!-- Using require.js, a module system for javascript, include the
+         js files. This loads "main.js", which in turn can load other
+         files, all handled by require.js:
+         http://requirejs.org/docs/api.html#jsfiles -->
+    <script type="text/javascript"
+            data-main="js/init.js"
+            src="js/lib/require.js"></script>
+
+  </body>
+</html>
