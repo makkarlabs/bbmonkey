@@ -27,7 +27,30 @@
 
     <x-view id="app">
       <x-view class="home">
-        <x-view class="homesub">
+        <x-view>
+            <header>
+                <h1>Live View</h1>
+            </header>
+                 
+            <h5>Create Room</h5>
+            <form>
+              <input type="text" name="cRoom" size=10 id="cRoom" />
+              <input type="hidden" name="username"id="username" value={{username}} />
+              <input type="button" value="Create"  id="suButton"/>
+           </form>
+            <h5>Available Rooms</h5>
+            <select name="rooms" id="list" size="5"> 
+            </select>
+
+
+            <footer>
+                               
+            <button data-view=".homesub" id="enterRoom" hidden="hidden" />Enter Room</button>
+            </footer>
+        </x-view>
+
+
+        <x-listview class="homesub">
           <header>
             <h1>Live View</h1>
           </header>
@@ -39,7 +62,7 @@
             
             <button style="float:right;" data-view=".list">Discuss</button>
           </footer>
-        </x-view>
+        </x-listview>
 
         <x-listview class="list">
           <header>

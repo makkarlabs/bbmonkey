@@ -5,8 +5,47 @@ var $ = require('zepto');
 var Mustache = require('mustache');
 var socket = io.connect("http://rangatrade.com:80");
 var tmpl = "<iframe src='{{link}}'></iframe>";
-var newfunc;
+var list = "{{#rlist}}<option>{{.}}</option>{{/rlist}}";
+var roomname = null;
 $(document).ready(function() {
+
+    $('enterRoom').hide();
+	socket.emit('listroom', {});
+	socket.on('listroom', function(data) {
+		alert(data['no']);
+		var rooms = Mustache.to_html(list, data);
+		$('#list').html(rooms);
+	});
+
+	$("#suButton").click(function(e) {
+        e.preventDefault();
+        alert("rangatrade");
+		if($('#cRoom').val()) {
+			var data = {};
+			data.room = $('#cRoom').val();
+			socket.emit('createroom', data);
+			$('#cRoom').val('');
+		}
+	});
+    
+    $('#list').change(function() {
+        var data = {};
+        data.room = $('#list').val();
+        if(roomname) {
+            var roomdata = {};
+            roomdata.room = roomname
+            socket.emit('leaveroom', roomdata);
+        }
+        socket.emit('joinroom',data);
+        socket.once('joinroom', function(data) {
+            alert('joined');
+            roomname = $('#list').val();
+            $('#enterRoom').show();
+
+        });
+    });
+
+
 	socket.on("groupChat", function(data) {
 		var tmpl = "<p>{{sender}} : {{message}}</p>"
 		var html = Mustache.to_html(tmpl, data);
