@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="css/install-button.css">
     <link rel="stylesheet" href="css/layouts.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <style>
         x-view > header, xview > footer{
-            background-color:#e5e5e5;
+            background-color:#444 !important;
+        }
+        div.central {
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
   </head>
@@ -32,8 +37,14 @@
             <header>
                 <h1>Live View</h1>
             </header>
-            <input type="text" placeholder="Pick your nick" id="nick"/>
-            <button id="nicksubmit" class="btn">Register Nick</button>
+            <div class="container">
+            <div class="row">
+            <div class="central span12">
+                <input type="text" placeholder="Pick your nick" id="nick"/><br>
+                <button id="nicksubmit" class="btn btn-primary">Register Nick</button>
+            </div>
+            </div>
+            </div>
             <footer>
                 <button id="nickok" data-view=".rooms" disabled="disabled">Enter</button>     
             </footer>
