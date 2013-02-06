@@ -12,14 +12,12 @@ $(document).ready(function() {
     $('enterRoom').hide();
 	socket.emit('listroom', {});
 	socket.on('listroom', function(data) {
-		alert(data['no']);
 		var rooms = Mustache.to_html(list, data);
 		$('#list').html(rooms);
 	});
 
 	$("#suButton").click(function(e) {
         e.preventDefault();
-        alert("rangatrade");
 		if($('#cRoom').val()) {
 			var data = {};
 			data.room = $('#cRoom').val();
@@ -35,7 +33,7 @@ $(document).ready(function() {
         data.nick = nick;
         if(roomname) {
             var roomdata = {};
-            roomdata.room = roomname
+            roomdata.room = roomname;
             socket.emit('leaveroom', roomdata);
         }
         socket.emit('joinroom',data);
@@ -100,6 +98,8 @@ $(document).ready(function() {
         $('#nickok').click(function(){
             $('#nickhome').removeClass("home");
             $('#roomshome').addClass("home").removeClass("rooms");
+            $("#roomshome > header > div > .back").hide();
+
         });
 
     });
