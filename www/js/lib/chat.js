@@ -9,7 +9,7 @@ var tmpl = "<iframe src='{{link}}'></iframe>";
 var list = "{{#rlist}}<option>{{.}}</option>{{/rlist}}";
 var roomname = null;
 $(document).ready(function() {
-
+    $("#nick").focus();
     $('enterRoom').hide();
 	socket.emit('listroom', {});
 	socket.on('listroom', function(data) {
@@ -74,6 +74,7 @@ $(document).ready(function() {
 		socket.emit("reqchange", line);
 		$("#link").val("");
 	});
+
         $('#nicksubmit').click(function(){
               if($('#nick').val().length < 5){
                 $("#nickok").attr("disabled", "disabled");
@@ -90,12 +91,13 @@ $(document).ready(function() {
                         {
                             key = data.key;
                             nick = data.nick;
-                            //$('#nickok').removeAttr("disabled");
-                            
+                            $('#nickok').removeAttr("disabled");
+                            $("#nickok").trigger("click", []);
                         }
                         else
                         {
-                            //Error classes
+                            $("div.nick_cg").addClass("error");
+                            $("span.help-inline").html("Nickname already taken.");
                             $("#nickok").attr("disabled","disabled");
                         }
                 });
@@ -105,7 +107,6 @@ $(document).ready(function() {
             $('#nickhome').removeClass("home");
             $('#roomshome').addClass("home").removeClass("rooms");
             $("#roomshome > header > div > .back").hide();
-
         });
 
     });
