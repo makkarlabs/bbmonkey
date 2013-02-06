@@ -2,6 +2,7 @@ define(function(require){
 
 require(["js/lib/socket-io-wrap.js"],function(io){
 var $ = require('zepto');
+//var anim = require('lib/layouts/anim.js')
 var Mustache = require('mustache');
 var socket = io.connect("http://rangatrade.com:80");
 var tmpl = "<iframe src='{{link}}'></iframe>";
@@ -47,7 +48,7 @@ $(document).ready(function() {
 
 
 	socket.on("groupChat", function(data) {
-		var tmpl = "<p>{{sender}} : {{message}}</p>"
+		var tmpl = "<p class='arrow_box'>{{sender}} : {{message}}</p>"
 		var html = Mustache.to_html(tmpl, data);
 		$("#chatstream").append(html);
 	});
@@ -76,8 +77,12 @@ $(document).ready(function() {
         $('#nicksubmit').click(function(){
               if($('#nick').val().length < 5){
                 $("#nickok").attr("disabled", "disabled");
+                $("div.nick_cg").addClass("error");
+                $("span.help-inline").html("Nickname cannot be less than 5 characters.");
               }
               else{
+                $("div.nick_cg").removeClass("error");
+                $("span.help-inline").html("");
                 $.getJSON("http://rangatrade.com/nickserv?nick="+$('#nick').val(), 
                     function(data){
                         console.log(data);
@@ -85,7 +90,8 @@ $(document).ready(function() {
                         {
                             key = data.key;
                             nick = data.nick;
-                            $('#nickok').removeAttr("disabled");
+                            //$('#nickok').removeAttr("disabled");
+                            
                         }
                         else
                         {
