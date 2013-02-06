@@ -30,6 +30,49 @@
             display: block !important;
             width: 125px;
         }
+        h5 {
+            margin-left: auto;
+            margin-right: auto;
+            display: block !important;
+            width:125px;
+            text-align:center;
+       }
+       .joinform {
+           margin-left: auto;
+           margin-right: auto;
+           display: block !important;
+           width:200px;
+       }
+       #suButton {
+           margin-left: auto;
+           margin-right: auto;
+           display: block !important;
+           width:100px;
+       }
+       #list {
+           margin-left: auto;
+           margin-right:auto;
+           display: block !important;
+           width:100%;
+           background: #DCE5F2;
+           text-align: center;
+       }
+       #roomshome {
+           padding:0;
+       }
+       div#chatstream {
+           width:100%;
+           margin-left: auto;
+           margin-right: auto;
+           display: block !important;
+       }
+       div#chatstream p {
+           text-align: center;
+           margin-left: auto;
+           margin-right: auto;
+           display: block !important;
+           min-width: 100px;
+           max-width: 250px;
     </style>
   </head>
   <body>
@@ -50,29 +93,42 @@
             <div class="container">
             <div class="row">
             <div class="nickform">
-                <input type="text" placeholder="Pick your nick" id="nick"/><br><br>
-                <button id="nicksubmit" class="btn btn-primary">Register Nick</button>
+                <input type="text" placeholder="Pick your nick" id="nick"/><br>
+                <span class="err"></span><br>
+                <button id="nicksubmit" class="btn btn-primary">Choose Nick</button>
             </div>
             </div>
             </div>
             <footer>
-                <button id="nickok" data-view=".rooms" disabled="disabled">Enter</button>     
+                <button id="nickok" class="btn btn-primary" data-view=".rooms" disabled="disabled">Enter</button>     
             </footer>
         </x-view>
+        -
         <x-view id="roomshome" class="rooms">
             <header>
                 <h1>Live View</h1>
             </header>
-            <h5>Create Room</h5>
-            <form>
-              <input type="text" name="cRoom" size=10 id="cRoom" />
-              <input type="button" value="Create"  id="suButton"/>
-           </form>
-            <h5>Available Rooms</h5>
-            <select name="rooms" id="list" size="5"> 
-            </select>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="joinform">
+                        <h5>Create Room</h5>
+                        <br>
+                        <form>
+                            <input type="text" name="cRoom" size=10 id="cRoom" /><br><br>
+                            <input type="button" class="btn btn-primary" value="Create"  id="suButton"/><br>
+                        </form>
+                    </div>
+                    <div class="chooseroom">
+                        <hr>
+                        <h5>Available Rooms</h5>
+                        <select name="rooms" id="list" size="5"> 
+                        </select>
+                    </div>
+                </div>
+            </div>
             <footer>
-                <button data-view=".homesub" id="enterRoom" hidden="hidden" />Enter Room</button>
+                <button data-view=".homesub" class="btn btn-primary" id="enterRoom" hidden="hidden" />Enter Room</button>
             </footer>
         </x-view>
     </x-view>
@@ -80,15 +136,22 @@
 
         <x-listview class="homesub">
           <header>
+
             <h1>Live View</h1>
+            <button style="float:right;" class="btn btn-primary" data-view=".list">Discuss</button>
           </header>
-          <iframe src="" height="300px" id="iframee" mozbrowser></iframe>
+          <div class="container">
+          <div class="contentClass">
+            <iframe src="" height="100%" width="100%" FrameBorder="none" id="iframee" mozbrowser></iframe>
+          </div>
+          </div>
 	<div id="iframe-content"></div>
-    	<footer>    
-	  <input type="text" id="link" placeholder="Type here"/>
-          <button id="share" >Share page</button>
+    	<footer>
+        <div class="input-append">
+	      <input type="text" id="link" placeholder="Type here"/>
+          <button id="share" class="btn btn-primary" >Share</button>
+        </div>
             
-            <button style="float:right;" data-view=".list">Discuss</button>
           </footer>
         </x-listview>
 
@@ -96,11 +159,15 @@
           <header>
             <h1>Discuss</h1>
           </header>
+          <div class="container">
             <p></p>
             <div id="chatstream"></div>
-        <footer>    
+          </div>
+        <footer>
+        <div class="input-append"> 
             <input type="text" id="message" placeholder="Type here"/>
-            <button id="send">Send</button>
+            <button id="send" class="btn btn-primary">Send</button>
+        </div>
         </footer>
         </x-listview>
 
@@ -110,6 +177,11 @@
          js files. This loads "main.js", which in turn can load other
          files, all handled by require.js:
          http://requirejs.org/docs/api.html#jsfiles -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("button.back").
+        });
+    </script>
     <script type="text/javascript"
             data-main="js/init.js"
             src="js/lib/require.js"></script>

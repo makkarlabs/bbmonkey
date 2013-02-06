@@ -57,7 +57,7 @@ define(function(require) {
         var _this = this;
 
         if(!nav.children().length) {
-            var back = $('<button class="back">Back</button>');
+            var back = $('<button class="back btn btn-primary">Back</button>');
             nav.append(back);
 
             back.click(function() {
