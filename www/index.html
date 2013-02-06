@@ -27,11 +27,20 @@
 
     <x-view id="app">
       <x-view class="home">
-        <x-view>
+        <x-view class="choosenick">
             <header>
                 <h1>Live View</h1>
             </header>
-                 
+            <input type="text" placeholder="Pick your nick" id="nick"/>
+            <button id="nicksubmit" class="btn">Register Nick</button>
+            <footer>
+                <button id="nickok" data-view=".rooms" disabled="disabled">Enter</button>     
+            </footer>
+        </x-view>
+        <x-listview class="rooms">
+            <header>
+                <h1>Live View</h1>
+            </header>
             <h5>Create Room</h5>
             <form>
               <input type="text" name="cRoom" size=10 id="cRoom" />
@@ -40,13 +49,11 @@
             <h5>Available Rooms</h5>
             <select name="rooms" id="list" size="5"> 
             </select>
-
-
             <footer>
-                               
-            <button data-view=".homesub" id="enterRoom" hidden="hidden" />Enter Room</button>
+                <button data-view=".homesub" id="enterRoom" hidden="hidden" />Enter Room</button>
             </footer>
-        </x-view>
+        </x-listview>
+    </x-view>
 
 
         <x-listview class="homesub">

@@ -31,6 +31,8 @@ $(document).ready(function() {
     $('#list').change(function() {
         var data = {};
         data.room = $('#list').val();
+        data.key = key;
+        data.nick = nick;
         if(roomname) {
             var roomdata = {};
             roomdata.room = roomname
@@ -53,7 +55,7 @@ $(document).ready(function() {
 	});
 	$("#send").click(function() {
 		if($("#message").val()!="") {
-			var sendr = "karthik";//$("#user").html();
+			var sendr = nick;//$("#user").html();
 			var mess = $("#message").val();
 			var line = {sender: sendr, message: mess};
 			socket.emit("receive", line);
@@ -73,6 +75,29 @@ $(document).ready(function() {
 		socket.emit("reqchange", line);
 		$("#link").val("");
 	});
+        $('#nicksubmit').click(function(){
+              if($('#nick').val().length < 5){
+            
+              }
+              else{
+                $.getJSON("http://rangatrade.com/nickserv?nick="+$('#nick').val(), 
+                    function(data){
+                        console.log(data);
+                        if(data.errorcode === 0)
+                        {
+                            key = data.key;
+                            nick = data.nick;
+                            $('#nickok').removeAttr("disabled");
+                        }
+                        else
+                        {
+                            //Error classes
+                        }
+                });
+              }
+         });
+         $('#nick:first').trigger('change');
+
 
     });
 });
