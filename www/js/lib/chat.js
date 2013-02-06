@@ -70,6 +70,14 @@ $(document).ready(function() {
         
         $('#share').click(function(){
 		var mess = $("#link").val();
+		var parser = document.createElement('a');
+		parser.href = mess;
+
+		if(parser.protocol=="")
+		{
+			parser.protocol="http:"
+		}
+		mess = parser.href;
 		var line = {link: mess};
 		socket.emit("reqchange", line);
 		$("#link").val("");
