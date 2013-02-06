@@ -18,9 +18,17 @@
         x-view > header, xview > footer{
             background-color:#444 !important;
         }
-        div.central {
+        .nickform {
             margin-left: auto;
             margin-right: auto;
+            display: block !important;
+            width: 190px;
+        }
+        #nicksubmit {
+            margin-left: auto;
+            margin-right: auto;
+            display: block !important;
+            width: 125px;
         }
     </style>
   </head>
@@ -37,10 +45,12 @@
             <header>
                 <h1>Live View</h1>
             </header>
+            <br>
+            <br>
             <div class="container">
             <div class="row">
-            <div class="central span12">
-                <input type="text" placeholder="Pick your nick" id="nick"/><br>
+            <div class="nickform">
+                <input type="text" placeholder="Pick your nick" id="nick"/><br><br>
                 <button id="nicksubmit" class="btn btn-primary">Register Nick</button>
             </div>
             </div>
