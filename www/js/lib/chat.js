@@ -77,7 +77,7 @@ $(document).ready(function() {
 	});
         $('#nicksubmit').click(function(){
               if($('#nick').val().length < 5){
-            
+                $("#nickok").attr("disabled", "disabled");
               }
               else{
                 $.getJSON("http://rangatrade.com/nickserv?nick="+$('#nick').val(), 
@@ -92,12 +92,15 @@ $(document).ready(function() {
                         else
                         {
                             //Error classes
+                            $("#nickok").attr("disabled","disabled");
                         }
                 });
               }
          });
-         $('#nick:first').trigger('change');
-
+        $('#nickok').click(function(){
+            $('#nickhome').removeClass("home");
+            $('#roomshome').addClass("home").removeClass("rooms");
+        });
 
     });
 });
