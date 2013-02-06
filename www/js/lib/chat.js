@@ -40,10 +40,10 @@ $(document).ready(function() {
         }
         socket.emit('joinroom',data);
         socket.once('joinroom', function(data) {
-            alert('joined');
+            $('#chatstream').html('');
+            $('#iframee').attr('src','');
             roomname = $('#list').val();
             $('#enterRoom').show();
-
         });
     });
 
