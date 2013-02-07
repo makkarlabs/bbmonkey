@@ -61,7 +61,7 @@
            padding:0;
        }
        div#chatstream {
-           width:100%;
+           width:90%;
            height:100%;
            margin-left: auto;
            margin-right: auto;
@@ -100,7 +100,36 @@
       .you {
            text-align: left;
        }
-      .arrow_box_left {
+      .arrow_box_right {
+        position: relative;
+        background: #17236e;
+        border: 1px solid #17236e;
+      }
+      .arrow_box_right:after, .arrow_box_right:before {
+        left: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .arrow_box_right:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-left-color: #17236e;
+        border-width: 5px;
+        top: 50%;
+        margin-top: -5px;
+      }
+      .arrow_box_right:before {
+        border-color: rgba(23, 35, 110, 0);
+        border-left-color: #17236e;
+        border-width: 8px;
+        top: 50%;
+        margin-top: -8px;
+      }
+       .arrow_box_left {
         position: relative;
         background: #17236e;
         border: 1px solid #17236e;

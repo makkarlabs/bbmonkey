@@ -107,8 +107,8 @@ $(document).ready(function() {
 
 
 	                                socket.on("groupChat", function(data) {
-                                        var tmpl_you = "<div class='arrow_box you'><strong>{{sender}}</strong> : {{message}}</div><br>";
-                                        var tmpl_me = "<div class='arrow_box_left me'><strong>{{sender}}</strong> : {{message}}</div><br>";
+                                        var tmpl_you = "<div class='arrow_box_left you'><strong>{{sender}}</strong> : {{message}}</div><br>";
+                                        var tmpl_me = "<div class='arrow_box_right me'><strong>{{sender}}</strong> : {{message}}</div><br>";
 		                                if(nick === data.sender){
                                             var html = Mustache.to_html(tmpl_me, data);
                                         }
