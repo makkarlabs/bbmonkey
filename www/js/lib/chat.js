@@ -58,13 +58,17 @@ $(document).ready(function() {
 
 
 	socket.on("groupChat", function(data) {
-		var tmpl = "<p class='arrow_box'>{{sender}} : {{message}}</p>"
-		var html = Mustache.to_html(tmpl, data);
+        var tmpl_you = "<div class='arrow_box'><p class='you'>{{sender}} : {{message}}</p></div>";
+        var tmpl_me = "<div class='arrow_box'><p class='me'>{{sender}} : {{message}}</p></div>";
+		if(nick === data.sender)
+            var html = Mustache.to_html(tmpl_me, data);
+        else
+            var html = Mustache.to_html(tmpl_you, line);
 		$("#chatstream").append(html);
 	});
 	$("#send").click(function() {
 		if($("#message").val()!="") {
-			var sendr = nick;//$("#user").html();
+			var sendr = nick;
 			var mess = $("#message").val();
 			var line = {sender: sendr, message: mess};
 			socket.emit("receive", line);

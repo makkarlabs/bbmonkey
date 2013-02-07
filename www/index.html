@@ -65,16 +65,28 @@
            margin-left: auto;
            margin-right: auto;
            display: block !important;
+           overflow-y: auto;
+           overflow-x: hidden;
+           min-width: 100px;
+           max-width: 250px;
        }
-       div#chatstream p {
-           text-align: center;
+       div#chatstream p.me {
            margin-left: auto;
            margin-right: auto;
            display: block;
-           min-width: 100px;
-           max-width: 250px;
-           overflow-y: auto;
-           overflow-x: hidden;
+           min-height: 15px;
+           width: 30px;
+           text-align: left;
+           color: white;
+         }
+       div#chatstream p.you {
+           margin-left: auto;
+           margin-right: auto;
+           display: block;
+           min-height: 15px;
+           width: 30px;
+           text-align: right;
+           color: white;
          }
       span.help-inline {
            text-align:center;
@@ -91,6 +103,56 @@
        .hidden {
            display:none;
        }
+.arrow_box {
+  position: relative;
+  background: #0b0c26;
+  border: 2px solid ;
+}
+.arrow_box:after, .arrow_box:before {
+  left: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(11, 12, 38, 0);
+  border-left-color: #0b0c26;
+  border-width: 10px;
+  top: 50%;
+  margin-top: -10px;
+}
+.arrow_box:before {
+  border-color: rgba(0, 0, 0, 0);
+  border-left-color: ;
+  border-width: 13px;
+  top: 50%;
+  margin-top: -13px;
+}
+        .arrow_box_left {
+          position: relative;
+          background: #c2e1f5;
+        }
+        .arrow_box_left:after {
+          left: 100%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+        }
+
+        .arrow_box_left:after {
+          border-color: rgba(194, 225, 245, 0);
+          border-left-color: #c2e1f5;
+          border-width: 10px;
+          top: 50%;
+          margin-top: -10px;
+        }
     </style>
   </head>
   <body>
