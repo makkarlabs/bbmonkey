@@ -150,7 +150,7 @@ $(document).ready(function() {
                             nick = data.nick;
                             socket.emit("setnick", data);
                             socket.once("setnick", function(data){
-                                if(data.errno === undefined
+                                if(data.errno === undefined)
                                 {
                                     nickname = data.nick;
                                     $('#nickok').removeAttr("disabled");
