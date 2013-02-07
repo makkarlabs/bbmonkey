@@ -41,6 +41,7 @@ $(document).ready(function() {
         socket.once('joinroom', function(data) {
             $('#chatstream').html('');
             $('#iframee').attr('src','');
+            $('#url').html('');
             roomname = $('#list').val();
             $('#enterRoom').show();
         });
@@ -65,20 +66,26 @@ $(document).ready(function() {
 		var view = Mustache.to_html(tmpl, data);
                 $('#iframee').attr('src',data.link);
                 $('#iframee').attr('src', $('#iframee').attr('src'));
+                var urlshow = data.link;
+                if(data.link.length > 20) {
+                    urlshow = data.link.substring(0,20)+'...';
+                }
+                $('#url').html(urlshow);
+                $('#url').attr('href',data.link);
 		//$("#iframe-content").html("").html(view);
 	});
         
         $('#share').click(function(){
-		var mess = $("#link").val();
-		var parser = document.createElement('a');
-		parser.href = mess;
+		var linktext = $("#link").val();
+        var protre = new RegExp('^(http(s|)://)',["i"]);
+        //protre returns true if url starts with http:// or https://
+        var url = linktext;
+        if(protre.test(linktext) === false){
+            //add protocol suffix if not present
+            url = 'http://'+linktext;
+        }
 
-		if(parser.protocol=="")
-		{
-			parser.protocol="http:"
-		}
-		mess = parser.href;
-		var line = {link: mess};
+		var line = {link: url};
 		socket.emit("reqchange", line);
 		$("#link").val("");
 	});
