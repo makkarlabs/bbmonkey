@@ -117,8 +117,9 @@ $(document).ready(function() {
                             key = data.key;
                             nick = data.nick;
                             $('#nickok').removeAttr("disabled");
-                            //$("#nickok").trigger('click');
-                             $("span.help-inline").html('Available');
+                            $("#nickok").trigger('click');
+                            $("span.help-inline").html('Available');
+                            $("#roomshome > header > div > .back").hide();
 
                         }
                         else
@@ -130,13 +131,6 @@ $(document).ready(function() {
                 });
               }
          });
-        $('#nickok').click(function(){
-            //$("span.help-inline").html('');
-            $('#nickhome').removeClass("home");
-            $('#roomshome').addClass("home").removeClass("rooms");
-            $("#roomshome > header > div > .back").hide();
         });
-
     });
-});
 });
