@@ -148,11 +148,24 @@ $(document).ready(function() {
                         {
                             key = data.key;
                             nick = data.nick;
-                            $('#nickok').removeAttr("disabled");
-                            $("#nickok").trigger('click');
-                            $("span.help-inline").html('Available');
-                            $("#roomshome > header > div > .back").hide();
+                            socket.emit("setnick", data);
+                            socket.once("setnick", function(data){
+                                if(data.errno === undefined
+                                {
+                                    nickname = data.nick;
+                                    $('#nickok').removeAttr("disabled");
+                                    $("#nickok").trigger('click');
+                                    $("span.help-inline").html('Available');
+                                    $("#roomshome > header > div > .back").hide();
+                                }
+                                else
+                                {
+                                    $("div.nick_cg").addClass("error");
+                                    $("span.help-inline").html("Nickname registration failed, please try again.");
+                                    $("#nickok").attr("disabled","disabled");
 
+                                }
+                            });
                         }
                         else
                         {
