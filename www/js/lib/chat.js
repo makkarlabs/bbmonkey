@@ -6,15 +6,21 @@ var $ = require('zepto');
 var Mustache = require('mustache');
 var socket = io.connect("http://rangatrade.com:80");
 var tmpl = "<iframe src='{{link}}'></iframe>";
+var selectframe = " <select name='rooms' id='list' size='5'> </select>"
 var list = "{{#rlist}}<option>{{.}}</option>{{/rlist}}";
 var roomname = null;
+var loading_gif = "<img class='loading_gif' src='img/round-loader.gif'/>"
 $(document).ready(function() {
     $("#nick").focus();
-    $('enterRoom').hide();
+    $('#enterRoom').hide();
+    $('#enterroom_loader').hide();
 	socket.emit('listroom', {});
 	socket.on('listroom', function(data) {
+
 		var rooms = Mustache.to_html(list, data);
-		$('#list').html(rooms);
+        $('#list').removeClass('hidden'); 
+		$('#roomlist_loader').hide();
+        $('#list').html(rooms);
 	});
 
 	$("#suButton").click(function(e) {
@@ -28,6 +34,8 @@ $(document).ready(function() {
 	});
     
     $('#list').change(function() {
+        $('#enterRoom').hide();
+        $('#enterroom_loader').show();
         var data = {};
         data.room = $('#list').val();
         data.key = key;
@@ -43,6 +51,7 @@ $(document).ready(function() {
             $('#iframee').attr('src','');
             $('#url').html('');
             roomname = $('#list').val();
+            $('#enterroom_loader').hide();
             $('#enterRoom').show();
         });
     });
@@ -97,8 +106,9 @@ $(document).ready(function() {
                 $("span.help-inline").html("Nickname cannot be less than 5 characters.");
               }
               else{
+
                 $("div.nick_cg").removeClass("error");
-                $("span.help-inline").html("");
+                $("span.help-inline").html(loading_gif);
                 $.getJSON("http://rangatrade.com/nickserv?nick="+$('#nick').val(), 
                     function(data){
                         console.log(data);
@@ -107,7 +117,9 @@ $(document).ready(function() {
                             key = data.key;
                             nick = data.nick;
                             $('#nickok').removeAttr("disabled");
-                            $("#nickok").trigger("click", []);
+                            //$("#nickok").trigger('click');
+                             $("span.help-inline").html('Available');
+
                         }
                         else
                         {
@@ -119,6 +131,7 @@ $(document).ready(function() {
               }
          });
         $('#nickok').click(function(){
+            //$("span.help-inline").html('');
             $('#nickhome').removeClass("home");
             $('#roomshome').addClass("home").removeClass("rooms");
             $("#roomshome > header > div > .back").hide();

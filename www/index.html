@@ -22,7 +22,7 @@
             margin-left: auto;
             margin-right: auto;
             display: block !important;
-            width: 190px;
+            width: 165px;
         }
         #nicksubmit {
             margin-left: auto;
@@ -52,7 +52,7 @@
        #list {
            margin-left: auto;
            margin-right:auto;
-           display: block !important;
+          
            width:100%;
            background: #DCE5F2;
            text-align: center;
@@ -70,19 +70,26 @@
            text-align: center;
            margin-left: auto;
            margin-right: auto;
-           display: block !important;
+           display: block;
            min-width: 100px;
            max-width: 250px;
          }
       span.help-inline {
            text-align:center;
+           width: 165px;
       }
-      #nickok {
-        display: none;
-      }
+      
       .bigfoot {
             height: 3em;
         }
+      .loading_gif {
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+       }
+       .hidden {
+           display:none;
+       }
     </style>
   </head>
   <body>
@@ -105,8 +112,8 @@
             <div class="nickform">
               <div class="control-group nick_cg">
                 <div class="controls">
-                <input type="text" placeholder="Pick your nick" id="nick"/><br>
-                <span class="help-inline"></span><br><br>
+                <input type="text" class="input-medium" placeholder="Pick your nick" id="nick"/><br>
+                <span id="errornick" class="help-inline"></span><br><br>
                 <button id="nicksubmit" class="btn btn-primary">Choose Nick</button>
                 </div>
               </div>
@@ -114,7 +121,7 @@
             </div>
             </div>
             <footer>
-                <button id="nickok" class="btn btn-primary" data-view=".rooms" hidden="hidden" disabled="disabled">Enter</button>     
+                <button id="nickok" class="btn btn-primary" data-view=".rooms"  disabled="disabled">Enter</button>     
             </footer>
         </x-view>
         -
@@ -136,12 +143,16 @@
                     <div class="chooseroom">
                         <hr>
                         <h5>Available Rooms</h5>
-                        <select name="rooms" id="list" size="5"> 
-                        </select>
+                        <select class="hidden" name='rooms' id='list' size='5'> </select> 
+                        <img id="roomlist_loader" class="loading_gif" src="img/round-loader.gif"/>
+                        
+                        </div>
                     </div>
                 </div>
             </div>
             <footer>
+                <img id="enterroom_loader" class="loading_gif" src="img/round-loader.gif"/>
+
                 <button data-view=".homesub" class="btn btn-primary" id="enterRoom" hidden="hidden" />Enter Room</button>
             </footer>
         </x-view>
