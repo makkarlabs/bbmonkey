@@ -9,7 +9,28 @@ var tmpl = "<iframe src='{{link}}'></iframe>";
 var selectframe = " <select name='rooms' id='list' size='5'> </select>"
 var list = "{{#rlist}}<option>{{.}}</option>{{/rlist}}";
 var roomname = null;
-var loading_gif = "<img class='loading_gif' src='img/round-loader.gif'/>"
+var loading_gif = "<img class='loading_gif' src='img/round-loader.gif'/>";
+
+$.fn.scrollToBottom = function(duration) {
+    var $el = this;
+    var el  = $el[0];
+    var startPosition = el.scrollTop;
+    var delta = el.scrollHeight - $el.height() - startPosition;
+
+    var startTime = Date.now();
+
+    function scroll() {
+        var fraction = Math.min(1, (Date.now() - startTime) / duration);
+
+        el.scrollTop = delta * fraction + startPosition;
+
+        if(fraction < 1) {
+            setTimeout(scroll, 10);
+        }
+    }
+    scroll();
+};
+
 $(document).ready(function() {
     $("#nick").focus();
     $('#enterRoom').hide();
@@ -60,11 +81,18 @@ $(document).ready(function() {
 	socket.on("groupChat", function(data) {
         var tmpl_you = "<div class='arrow_box'><p class='you'>{{sender}} : {{message}}</p></div>";
         var tmpl_me = "<div class='arrow_box'><p class='me'>{{sender}} : {{message}}</p></div>";
-		if(nick === data.sender)
+		if(nick === data.sender){
             var html = Mustache.to_html(tmpl_me, data);
-        else
+        }
+        else{
             var html = Mustache.to_html(tmpl_you, line);
+        }
 		$("#chatstream").append(html);
+        var $el = $('#chatstream');
+        //var el = $el[0]; /* Actual DOM element */
+        /* Scroll to bottom */
+        //el.scrollTop = el.scrollHeight - $el.height();
+	$el.scrollToBottom(500);
 	});
 	$("#send").click(function() {
 		if($("#message").val()!="") {
