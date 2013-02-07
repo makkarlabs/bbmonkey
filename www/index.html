@@ -71,22 +71,13 @@
            min-width: 100px;
            max-width: 250px;
        }
-       div#chatstream p.me {
+       div#chatstream p {
            margin-left: auto;
            margin-right: auto;
            display: block;
            min-height: 15px;
            width: 300px;
-           text-align: left;
-           color: white;
-         }
-       div#chatstream p.you {
-           margin-left: auto;
-           margin-right: auto;
-           display: block;
-           min-height: 15px;
-           width: 300px;
-           text-align: right;
+           text-align: center;
            color: white;
          }
       span.help-inline {
@@ -104,35 +95,41 @@
        .hidden {
            display:none;
        }
-.arrow_box {
-  position: relative;
-  background: #0b0c26;
-  border: 2px solid ;
-}
-.arrow_box:after, .arrow_box:before {
-  left: 100%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
+       .me {
+           margin-left: 0;
+       }
+      .you {
+           margin-right: 0;
+       }
+      .arrow_box {
+        position: relative;
+        background: #17236e;
+        border: 1px solid #17236e;
+      }
+      .arrow_box:after, .arrow_box:before {
+        right: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
 
-.arrow_box:after {
-  border-color: rgba(11, 12, 38, 0);
-  border-left-color: #0b0c26;
-  border-width: 10px;
-  top: 50%;
-  margin-top: -10px;
-}
-.arrow_box:before {
-  border-color: rgba(0, 0, 0, 0);
-  border-left-color: ;
-  border-width: 13px;
-  top: 50%;
-  margin-top: -13px;
-}
+      .arrow_box:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-right-color: #17236e;
+        border-width: 5px;
+        top: 50%;
+        margin-top: -5px;
+      }
+      .arrow_box:before {
+        border-color: rgba(23, 35, 110, 0);
+        border-right-color: #17236e;
+        border-width: 8px;
+        top: 50%;
+        margin-top: -8px;
+      }
         .arrow_box_left {
           position: relative;
           background: #c2e1f5;
