@@ -35,102 +35,7 @@ $(document).ready(function() {
     $("#nick").focus();
     $('#enterRoom').hide();
     $('#enterroom_loader').hide();
-	socket.emit('listroom', {});
-	socket.on('listroom', function(data) {
-
-		var rooms = Mustache.to_html(list, data);
-        $('#list').removeClass('hidden'); 
-		$('#roomlist_loader').hide();
-        $('#list').html(rooms);
-	});
-
-	$("#suButton").click(function(e) {
-        e.preventDefault();
-		if($('#cRoom').val()) {
-			var data = {};
-			data.room = $('#cRoom').val();
-			socket.emit('createroom', data);
-			$('#cRoom').val('');
-		}
-	});
-    
-    $('#list').change(function() {
-        $('#enterRoom').hide();
-        $('#enterroom_loader').show();
-        var data = {};
-        data.room = $('#list').val();
-        data.key = key;
-        data.nick = nick;
-        if(roomname) {
-            var roomdata = {};
-            roomdata.room = roomname;
-            socket.emit('leaveroom', roomdata);
-        }
-        socket.emit('joinroom',data);
-        socket.once('joinroom', function(data) {
-            $('#chatstream').html('');
-            $('#iframee').attr('src','');
-            $('#url').html('');
-            roomname = $('#list').val();
-            $('#enterroom_loader').hide();
-            $('#enterRoom').show();
-        });
-    });
-
-
-	socket.on("groupChat", function(data) {
-        var tmpl_you = "<div class='arrow_box'><p class='you'>{{sender}} : {{message}}</p></div>";
-        var tmpl_me = "<div class='arrow_box'><p class='me'>{{sender}} : {{message}}</p></div>";
-		if(nick === data.sender){
-            var html = Mustache.to_html(tmpl_me, data);
-        }
-        else{
-            var html = Mustache.to_html(tmpl_you, line);
-        }
-		$("#chatstream").append(html);
-        var $el = $('#chatstream');
-        //var el = $el[0]; /* Actual DOM element */
-        /* Scroll to bottom */
-        //el.scrollTop = el.scrollHeight - $el.height();
-	$el.scrollToBottom(500);
-	});
-	$("#send").click(function() {
-		if($("#message").val()!="") {
-			var sendr = nick;
-			var mess = $("#message").val();
-			var line = {sender: sendr, message: mess};
-			socket.emit("receive", line);
-			$("#message").val("");
-		}
-	});
-	socket.on("linkchange", function(data) {
-		var view = Mustache.to_html(tmpl, data);
-                $('#iframee').attr('src',data.link);
-                $('#iframee').attr('src', $('#iframee').attr('src'));
-                var urlshow = data.link;
-                if(data.link.length > 20) {
-                    urlshow = data.link.substring(0,20)+'...';
-                }
-                $('#url').html(urlshow);
-                $('#url').attr('href',data.link);
-		//$("#iframe-content").html("").html(view);
-	});
-        
-        $('#share').click(function(){
-		var linktext = $("#link").val();
-        var protre = new RegExp('^(http(s|)://)',["i"]);
-        //protre returns true if url starts with http:// or https://
-        var url = linktext;
-        if(protre.test(linktext) === false){
-            //add protocol suffix if not present
-            url = 'http://'+linktext;
-        }
-
-		var line = {link: url};
-		socket.emit("reqchange", line);
-		$("#link").val("");
-	});
-
+	
         $('#nicksubmit').click(function(){
               if($('#nick').val().length < 5){
                 $("#nickok").attr("disabled", "disabled");
@@ -148,15 +53,112 @@ $(document).ready(function() {
                         {
                             key = data.key;
                             nick = data.nick;
+                            console.log(data);
                             socket.emit("setnick", data);
                             socket.once("setnick", function(data){
+                                console.log(data);
                                 if(data.errno === undefined)
-                                {
-                                    nickname = data.nick;
+                                {                                                        
                                     $('#nickok').removeAttr("disabled");
                                     $("#nickok").trigger('click');
                                     $("span.help-inline").html('Available');
                                     $("#roomshome > header > div > .back").hide();
+                                    socket.emit('listroom', {});
+	                                socket.on('listroom', function(data) {
+
+		                                var rooms = Mustache.to_html(list, data);
+                                        $('#list').removeClass('hidden'); 
+		                                $('#roomlist_loader').hide();
+                                        $('#list').html(rooms);
+	                                });
+
+	                                $("#suButton").click(function(e) {
+                                        e.preventDefault();
+		                                if($('#cRoom').val()) {
+			                                var data = {};
+			                                data.room = $('#cRoom').val();
+			                                socket.emit('createroom', data);
+			                                $('#cRoom').val('');
+		                                }
+	                                });
+                                    
+                                    $('#list').change(function() {
+                                        $('#enterRoom').hide();
+                                        $('#enterroom_loader').show();
+                                        var data = {};
+                                        data.room = $('#list').val();
+                                        data.key = key;
+                                        data.nick = nick;
+                                        if(roomname) {
+                                            var roomdata = {};
+                                            roomdata.room = roomname;
+                                            socket.emit('leaveroom', roomdata);
+                                        }
+                                        socket.emit('joinroom',data);
+                                        socket.once('joinroom', function(data) {
+                                            $('#chatstream').html('');
+                                            $('#iframee').attr('src','');
+                                            $('#url').html('');
+                                            roomname = $('#list').val();
+                                            $('#enterroom_loader').hide();
+                                            $('#enterRoom').show();
+                                        });
+                                    });
+
+
+	                                socket.on("groupChat", function(data) {
+                                        var tmpl_you = "<div class='arrow_box'><p class='you'>{{sender}} : {{message}}</p></div>";
+                                        var tmpl_me = "<div class='arrow_box'><p class='me'>{{sender}} : {{message}}</p></div>";
+		                                if(nick === data.sender){
+                                            var html = Mustache.to_html(tmpl_me, data);
+                                        }
+                                        else{
+                                            var html = Mustache.to_html(tmpl_you, line);
+                                        }
+		                                $("#chatstream").append(html);
+                                        var $el = $('#chatstream');
+                                        //var el = $el[0]; /* Actual DOM element */
+                                        /* Scroll to bottom */
+                                        //el.scrollTop = el.scrollHeight - $el.height();
+	                                $el.scrollToBottom(500);
+	                                });
+	                                $("#send").click(function() {
+		                                if($("#message").val()!="") {
+			                                var sendr = nick;
+			                                var mess = $("#message").val();
+			                                var line = {sender: sendr, message: mess};
+			                                socket.emit("receive", line);
+			                                $("#message").val("");
+		                                }
+	                                });
+	                                socket.on("linkchange", function(data) {
+		                                var view = Mustache.to_html(tmpl, data);
+                                                $('#iframee').attr('src',data.link);
+                                                $('#iframee').attr('src', $('#iframee').attr('src'));
+                                                var urlshow = data.link;
+                                                if(data.link.length > 20) {
+                                                    urlshow = data.link.substring(0,20)+'...';
+                                                }
+                                                $('#url').html(urlshow);
+                                                $('#url').attr('href',data.link);
+		                                //$("#iframe-content").html("").html(view);
+	                                });
+                                        
+                                        $('#share').click(function(){
+		                                var linktext = $("#link").val();
+                                        var protre = new RegExp('^(http(s|)://)',["i"]);
+                                        //protre returns true if url starts with http:// or https://
+                                        var url = linktext;
+                                        if(protre.test(linktext) === false){
+                                            //add protocol suffix if not present
+                                            url = 'http://'+linktext;
+                                        }
+
+		                                var line = {link: url};
+		                                socket.emit("reqchange", line);
+		                                $("#link").val("");
+	                                });
+
                                 }
                                 else
                                 {
