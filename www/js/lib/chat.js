@@ -113,7 +113,7 @@ $(document).ready(function() {
                                             var html = Mustache.to_html(tmpl_me, data);
                                         }
                                         else{
-                                            var html = Mustache.to_html(tmpl_you, line);
+                                            var html = Mustache.to_html(tmpl_you, data);
                                         }
 		                                $("#chatstream").append(html);
                                         var $el = $('#chatstream');
