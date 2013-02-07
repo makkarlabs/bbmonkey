@@ -107,13 +107,13 @@ $(document).ready(function() {
 
 
 	                                socket.on("groupChat", function(data) {
-                                        var tmpl_you = "<div class='arrow_box'><p class='you'>{{sender}} : {{message}}</p></div>";
-                                        var tmpl_me = "<div class='arrow_box'><p class='me'>{{sender}} : {{message}}</p></div>";
+                                        var tmpl_you = "<div class='arrow_box you'><p><em>{{sender}}</em> : {{message}}</p></div><br>";
+                                        var tmpl_me = "<div class='arrow_box me'><p><em>{{sender}}</em> : {{message}}</p></div><br>";
 		                                if(nick === data.sender){
                                             var html = Mustache.to_html(tmpl_me, data);
                                         }
                                         else{
-                                            var html = Mustache.to_html(tmpl_you, line);
+                                            var html = Mustache.to_html(tmpl_you, data);
                                         }
 		                                $("#chatstream").append(html);
                                         var $el = $('#chatstream');
