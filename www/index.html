@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Place favicon.ico in the root directory -->
-    <script type="text/javascript" src="js/lib/porthole.min.js"></script>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/install-button.css">
     <link rel="stylesheet" href="css/layouts.css">
@@ -222,15 +221,13 @@
                         <h5>Available Rooms</h5>
                         <select class="hidden" name='rooms' id='list' size='5'> </select> 
                         <img id="roomlist_loader" class="loading_gif" src="img/round-loader.gif"/>
-                        
-                        </div>
                     </div>
                 </div>
             </div>
             <footer>
                 <img id="enterroom_loader" class="loading_gif" src="img/round-loader.gif"/>
 
-                <button data-view=".homesub" class="btn btn-primary" id="enterRoom" hidden="hidden" />Enter Room</button>
+                <button data-view=".homesub" class="btn btn-primary" id="enterRoom" hidden="hidden">Enter Room</button>
             </footer>
         </x-view>
     </x-view>
@@ -282,7 +279,6 @@
          files, all handled by require.js:
          http://requirejs.org/docs/api.html#jsfiles -->
 
-    </script>
     <script type="text/javascript"
             data-main="js/init.js"
             src="js/lib/require.js"></script>

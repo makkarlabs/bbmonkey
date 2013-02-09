@@ -4,9 +4,9 @@
   "description": "Browse with me allows users to browse content on the Internet together as a group. Users can identify themselves with customized nicknames and can create rooms to share content only with a group of people rather than publicly. Users can also discuss the content with all the members of the room with a group chat feature included.",
   "launch_path": "/index.html",
   "icons": {
-    "16": "/img/icons/mortar-16.png",
-    "48": "/img/icons/mortar-48.png",
-    "128": "/img/icons/mortar-128.png"
+    "16": "/img/icons/browsewithme16.png",
+    "48": "/img/icons/browsewithme48.png",
+    "128": "/img/icons/browsewithme128.png"
   },
   "developer": {
     "name": "Makkar Labs",
@@ -14,20 +14,6 @@
   },
   "installs_allowed_from": ["*"],
   "appcache_path": "",
-  "locales": {
-    "es": {
-      "description": "Su nueva aplicación impresionante Open Web",
-      "developer": {
-        "url": "http://makkarlabs.in/team/"
-      }
-    },
-    "it": {
-      "description": "Il vostro nuovo fantastico Open Web App",
-      "developer": {
-        "url": "http://makkarlabs.in/team/"
-      }
-    }
-  },
   "permissions": {
     "browser":{},
     "systemXHR": {},
