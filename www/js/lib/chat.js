@@ -4,7 +4,6 @@ require(["js/lib/socket-io-wrap.js"],function(io){
 var $ = require('zepto');
 var Mustache = require('mustache');
 var socket = io.connect("http://rangatrade.com:80");
-var tmpl = "<iframe src='{{link}}'></iframe>";
 var selectframe = " <select name='rooms' id='list' size='5'> </select>"
 var list = "{{#rlist}}<option>{{.}}</option>{{/rlist}}";
 var roomname = null;
@@ -44,6 +43,7 @@ $(document).ready(function() {
 
                 $("div.nick_cg").removeClass("error");
                 $("span.help-inline").html(loading_gif);
+                $(this).attr('disabled', 'disabled');
                 $.getJSON("http://rangatrade.com/nickserv?nick="+$('#nick').val(), 
                     function(data){
                         console.log(data);
@@ -107,7 +107,8 @@ $(document).ready(function() {
 	                                socket.on("groupChat", function(data) {
                                         var tmpl_you = "<div class='arrow_box_right you'><strong>{{sender}}</strong> : <p class='dialogue'>&nbsp{{message}}</p></div><br>";
                                         var tmpl_me = "<div class='arrow_box_left you'><strong>Me</strong> : <p class='dialogue'>&nbsp{{message}}</p></div><br>";
-		                                if(nick === data.sender){
+
+                                        if(nick === data.sender){
                                             var html = Mustache.to_html(tmpl_me, data);
                                         }
                                         else{
@@ -130,7 +131,7 @@ $(document).ready(function() {
 		                                }
 	                                });
 	                                socket.on("linkchange", function(data) {
-		                                var view = Mustache.to_html(tmpl, data);
+                                                $('p.apology').css('display', 'none');
                                                 $('#iframee').attr('src',data.link);
                                                 $('#iframee').attr('src', $('#iframee').attr('src'));
                                                 var urlshow = data.link;
@@ -155,18 +156,6 @@ $(document).ready(function() {
 		                                socket.emit("reqchange", line);
 		                                $("#link").val("");
 	                                });
-
-                                    $("#iframee").ready(function() {
-                                        var framebody = $("#iframee").children("body");
-                                        framebody.children("a").click(function() {
-                                            var url = $(anchor).attr('href');
-                                            var check = new RegExp('#');
-                                            if(check.test(url)) {
-                                                var line = {link: url};
-                                                socket.emit("reqchange", line);
-                                            }
-                                        });
-                                    });
 
                                 }
                                 else

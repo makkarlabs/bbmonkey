@@ -107,8 +107,8 @@
        }
       .arrow_box_right {
         position: relative;
-        background: #17236e;
-        border: 1px solid #17236e;
+        background: #000c1f;
+        border: 1px solid #000c1f;
       }
       .arrow_box_right:after, .arrow_box_right:before {
         left: 100%;
@@ -122,22 +122,22 @@
 
       .arrow_box_right:after {
         border-color: rgba(136, 183, 213, 0);
-        border-left-color: #17236e;
+        border-left-color: #000c1f;
         border-width: 5px;
         top: 50%;
         margin-top: -5px;
       }
       .arrow_box_right:before {
         border-color: rgba(23, 35, 110, 0);
-        border-left-color: #17236e;
+        border-left-color: #000c1f;
         border-width: 8px;
         top: 50%;
         margin-top: -8px;
       }
        .arrow_box_left {
         position: relative;
-        background: #17236e;
-        border: 1px solid #17236e;
+        background: #6b6bff;
+        border: 1px solid #6b6bff;
       }
       .arrow_box_left:after, .arrow_box_left:before {
         right: 100%;
@@ -151,17 +151,21 @@
 
       .arrow_box_left:after {
         border-color: rgba(136, 183, 213, 0);
-        border-right-color: #17236e;
+        border-right-color: #6b6bff;
         border-width: 5px;
         top: 50%;
         margin-top: -5px;
       }
       .arrow_box_left:before {
         border-color: rgba(23, 35, 110, 0);
-        border-right-color: #17236e;
+        border-right-color: #6b6bff;
         border-width: 8px;
         top: 50%;
         margin-top: -8px;
+      }
+      .apology {
+        font-size: large;
+        text-align: center;
       }
     </style>
   </head>
@@ -240,7 +244,8 @@
           </header>
           <div class="container">
           <div class="contentClass">
-            <iframe src="" height="100%" width="100%" FrameBorder="none" id="iframee" mozbrowser></iframe>
+            <p class="apology">Some websites such as google, github, facebook, etc. do not allow their websites to be accessed from outside a browser. We are working hard to get you as much as content as possible and will do so in future versions.</p>
+            <iframe src="" height="100%" width="100%" FrameBorder="none" id="iframee" name="iframee" mozbrowser></iframe>
           </div>
           </div>
   <div id="iframe-content"></div>
