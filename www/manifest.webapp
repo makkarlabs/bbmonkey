@@ -1,7 +1,7 @@
 {
   "version": "0.9",
   "name": "Browse with me",
-  "description": "Browse with me allows users to browse content on the Internet together as a group. Users can identify themselves with customized nicknames and can create rooms to share content only with a group of people rather than publicly. Users can also discuss the content with all the members of the room with a group chat feature included.",
+  "description": "This app allows users to browse content on the Internet together as a group. Users can also discuss the content with all the members of the room with a group chat feature included.",
   "launch_path": "/index.html",
   "icons": {
     "16": "/img/icons/browsewithme16.png",
@@ -13,12 +13,9 @@
     "url": "http://makkarlabs.in/team/"
   },
   "installs_allowed_from": ["*"],
-  "appcache_path": "",
+  "appcache_path": "/cache.manifest",
   "permissions": {
     "browser":{},
-    "systemXHR": {},
-    "network-http": {},
-    "network-tcp": {}
   },
   "default_locale": "en"
 }
